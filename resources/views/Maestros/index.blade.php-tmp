@@ -1,0 +1,97 @@
+@extends('layouts.app')
+@section('content')
+<div class="content-wrapper">
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+<?php $create = Session::get('message');?>
+                @if($create == 'create')
+                <div class="callout callout-info">
+                    <h4>En hora buena</h4>
+                    <p>El maestro fue agergado correctamente</p>
+                </div>
+                @elseif($create == 'update')
+                <div class="callout callout-info">
+                    <h4>En hora buena</h4>
+                    <p>El maestro fue actualizado correctamente</p>
+                </div>
+                @elseif($create  == 'delete')
+                <div class="callout callout-info">
+                    <h4>En hora buena</h4>
+                    <p>El maestro fue Eliminado correctamente</p>
+                </div>
+
+                @endif
+            </div>
+        </div>
+        <!--<a href="{{asset('maestros/create')}}" class="btn btn-success"><span class="fa fa-plus"></span> Agregar Maestro</a><br><br>
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>email</th>
+                    <th>Vocacion</th>
+                    <th>Accion</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($maestros as $maestro)
+                <tr>
+                    <td>{{$maestro->id}}</td>
+                    <td>{{$maestro->nombre}}</td>
+                    <td>{{$maestro->apellido}}</td>
+                    <td>{{$maestro->email}}</td>
+                    <td>{{$maestro->vocacion}}</td>
+                    <td>
+                        <a href="{{asset('maestros/'.$maestro->id.'/edit')}}" class="btn btn-primary btn-md btn-circle-fabs"><span class="fa fa-edit"></span></a>
+                        <a href="{{asset('maestros/'.$maestro->id)}}" class="btn btn-success btn-md btn-circle-fabs"><span class="fa fa-info"></span></a>
+                        @include('Maestros.forms.delete')
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>-->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="header">
+                        <h4>Maestros <span class="badge">{{count($maestros)}}</span></h4>
+                        <p class="text">En esta seccion te mostramos todos los maestros agregados</p>
+                    </div>
+                    <hr>
+                    <div class="content table-responsive table-full-width">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>email</th>
+                                <th>Vocacion</th>
+                                <th>Accion</th>
+                            </thead>
+                            <tbody>
+                                @foreach($maestros as $maestro)
+                                    <tr>
+                                        <td>{{$maestro->id}}</td>
+                                        <td>{{$maestro->nombre}}</td>
+                                        <td>{{$maestro->apellido}}</td>
+                                        <td>{{$maestro->email}}</td>
+                                        <td>{{$maestro->vocacion}}</td>
+                                        <td>
+                                            <a href="{{asset('maestros/'.$maestro->id.'/edit')}}" class="btn btn-primary btn-md btn-circle-fabs"><span class="fa fa-edit"></span></a>
+                                            <a href="{{asset('maestros/'.$maestro->id)}}" class="btn btn-success btn-md btn-circle-fabs"><span class="fa fa-info"></span></a>
+                                            @include('Maestros.forms.delete')
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+@endsection

@@ -1,0 +1,34 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\User;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
+use Auth;
+
+class ConfigUsuariosController extends Controller
+{
+    public function update_avatar(Request $request){
+    	$this->validate($request,[
+    		'avatar'=>'required|image'
+    	]);
+
+    	$user = Auth::user();
+        $delete = $user->avatar;
+    	$imagen = $request->file('avatar');
+        $num = rand(1,10000);
+        $filename  = $user->nombre.$user->apellido.$user->id.$num.Carbon::now()->second.'.'.$imagen->getClientOriginalExtension();
+        $path = public_path('imagenes_general/usuarios/'.$filename);
+        Storage::disk('local')->put('usuarios/'.$filename,file_get_contents($imagen));
+        $user->avatar = $filename;
+        $user->save();
+        //
+        Storage::disk('local')->delete('usuarios/'.$delete);
+        $data['success'] = true;
+
+        $data['path'] = $filename;
+        return $data;
+    }
+}
